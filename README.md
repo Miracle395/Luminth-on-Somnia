@@ -65,7 +65,7 @@ Luminth introduces:
 
 ---
 
-## Luminth has git use cases. 
+## Luminth has got use cases. 
 
 Luminth demonstrates how **reactivity can transform DeFi UX** from static dashboards into live, event driven financial interfaces.
 
