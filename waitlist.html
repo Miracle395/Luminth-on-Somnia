@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luminth — Private Mainnet Beta</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green: #00c896;
+      --dark: #0b1f1a;
+      --muted: #5f6f6b;
+      --bg: #f9fbfa;
+      --card: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: var(--card);
+      padding: 42px 36px;
+      max-width: 460px;
+      width: 92%;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+      text-align: center;
+      display: none;
+    }
+
+    .container.active {
+      display: block;
+      animation: fade 0.4s ease;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(0,200,150,0.12);
+      color: var(--green);
+      font-weight: 600;
+      font-size: 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    input {
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid #e3e8e6;
+      font-size: 15px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(0,200,150,0.15);
+    }
+
+    button {
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      background: var(--green);
+      color: #00261f;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0,200,150,0.35);
+    }
+
+    .footer-text {
+      margin-top: 22px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .checkmark {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: rgba(0,200,150,0.15);
+      color: var(--green);
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .link {
+      font-size: 14px;
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- STEP 1 -->
+  <main id="step1" class="container active">
+    <span class="badge">PRIVATE MAINNET BETA</span>
+
+    <h1>Luminth is coming to mainnet.</h1>
+
+    <p class="subtitle">
+      A consumer ready way to save, earn yield, and stay liquid
+      powered by onchain finance.
+    </p>
+
+    <form
+      id="waitlistForm"
+      action="https://formspree.io/f/mdkonldl"
+      method="POST"
+    >
+      <input
+        type="email"
+        name="email"
+        placeholder="Email address"
+        required
+      />
+
+      <!-- optional metadata -->
+      <input type="hidden" name="source" value="Private Mainnet Beta" />
+
+      <button type="submit">Join the waitlist</button>
+    </form>
+
+    <p class="footer-text">Invite-only access • Limited spots</p>
+  </main>
+
+  <!-- STEP 2 -->
+  <main id="step2" class="container">
+    <div class="checkmark">✓</div>
+
+    <h1>You’re on the list.</h1>
+
+    <p class="subtitle">
+      Luminth private mainnet beta is invite only.  
+      Selected users will receive early access.
+    </p>
+
+    <a href="https://x.com/luminth_xyz" class="link">
+      Follow updates → @Luminth
+    </a>
+  </main>
+
+  <script>
+  const form = document.getElementById("waitlistForm");
+  const step1 = document.getElementById("step1");
+  const step2 = document.getElementById("step2");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      // Success UI
+      step1.classList.remove("active");
+      step2.classList.add("active");
+
+    } catch (err) {
+      alert("Something went wrong. Please try again.");
+    }
+  });
+</script>
+
+</body>
+</html>
