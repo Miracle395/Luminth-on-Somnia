@@ -1,0 +1,791 @@
+:root {
+  --stable-dark: #021B17;
+  --stable-green: #0E3C35;
+  --stable-mint: #A9FBD7;
+  --stable-teal: #00C896;
+  --stable-white: #FFFFFF;
+  --staking-text: #E6FFF7;
+ 
+  --auth-dark: #021B17;
+  --auth-deep: #062F27;
+  --auth-green: #0E3C35;
+  --auth-accent: #00C896;
+  --auth-muted: #6b807a;
+}
+
+/* Reset & global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  background-color: var(--stable-dark);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--staking-text);
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Placeholder text */
+::placeholder {
+  color: rgba(230, 255, 247, 0.7);
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Side Menu */
+.side-menu {
+  height: 100%; width: 0;
+  position: fixed; top: 0; right: 0;
+  background-color: var(--stable-dark);
+  overflow-x: hidden;
+  transition: width 0.3s ease-in-out;
+  padding-top: 60px;
+  z-index: 999;
+}
+.side-menu a {
+  display: block;
+  padding: 12px 25px;
+  font-size: 20px;
+  color: var(--stable-white);
+  text-decoration: none;
+  transition: 0.3s;
+}
+.side-menu a:hover { color: var(--stable-mint); }
+.side-menu .close-btn {
+  position: absolute; top: 10px; right: 25px;
+  font-size: 36px;
+  color: var(--stable-mint);
+  text-decoration: none;
+}
+
+/* Intro Section */
+/* HERO LAYOUT */
+.hero-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 80px;
+}
+
+/* HERO TEXT */
+.staking-intro {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.staking-intro h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--stable-white);
+  margin-bottom: 6px;
+}
+
+.staking-intro h1 span {
+  color: var(--stable-mint);
+}
+
+.staking-intro h2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgba(230, 255, 247, 0.85);
+  margin-bottom: 10px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.staking-intro p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(230, 255, 247, 0.65);
+  margin-bottom: 0;
+  margin: 0 auto;
+  max-width: 460px;
+  opacity: 0.85;
+}
+
+/* Staking Card */
+.staking-card {
+  background: linear-gradient(
+    180deg,
+    rgba(14, 60, 53, 0.95),
+    rgba(2, 27, 23, 0.95)
+  );
+  border-radius: 24px;
+  padding: 28px 22px 32px;
+  max-width: 420px;
+  margin: -40px auto 0;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(169, 251, 215, 0.08);
+}
+
+.staking-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 42px rgba(0, 200, 150, 0.28),
+    inset 0 0 18px rgba(169, 251, 215, 0.08);
+}
+
+.staking-card::before {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-bottom: 24px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(169,251,215,0.35),
+    transparent
+  );
+}
+
+/* Toggle Tabs */
+.staking-toggle {
+  display: flex;
+  
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.tab {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  background: var(--stable-green);
+  border: none;
+  color: var(--stable-white);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s ease;
+}
+.tab.active {
+  background: var(--stable-mint);
+  color: var(--stable-dark);
+  box-shadow: 0 0 15px var(--stable-mint);
+  transform: scale(1.02);
+}
+.tab:hover:not(.active) {
+  background: var(--stable-dark);
+}
+
+/* Staking Heading */
+.staking-heading {
+  text-align: center;
+  font-size: 1.55rem;
+  margin-bottom: 2rem;
+  color: var(--stable-mint);
+}
+
+/* Form Groups */
+.form-group { margin-bottom: 1.5rem; }
+.form-group label {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(230, 255, 247, 0.6);
+}
+
+/* Input Tokens */
+.input-token {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: rgba(255, 255, 255, 0.045);
+  border-radius: 18px;
+  padding: 16px 18px;
+
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.input-token:hover {
+  background: rgba(255, 255, 255, 0.065);
+  box-shadow: 0 8px 20px rgba(0, 200, 150, 0.18);
+}
+
+/* Token icon */
+.token-icon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.9;
+}
+
+/* Input field */
+.input-token input {
+  flex: 1;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: var(--stable-white);
+  caret-color: var(--stable-mint);
+
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.input-token input::placeholder {
+  color: rgba(230, 255, 247, 0.45);
+}
+
+/* Input text */
+input {
+  color: #0f172a; /* dark text */
+}
+
+/* Placeholder text */
+input::placeholder {
+  color: rgba(15, 23, 42, 0.45); /* visible but subtle */
+}
+
+/* On focus (even clearer) */
+input:focus::placeholder {
+  color: rgba(15, 23, 42, 0.25);
+}
+
+#withdrawOverlay input {
+  color: #0f172a;
+}
+
+#withdrawOverlay input::placeholder {
+  color: rgba(15, 23, 42, 0.45);
+}
+
+
+/* Max Button */
+.max-btn {
+  font-size: 0.85rem;
+  color: var(--stable-mint);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.max-btn:hover {
+  text-decoration: underline;
+  transform: scale(1.015);
+}
+
+/* Connect / Stake Buttons */
+.connect-btn,
+.stake-btn {
+  width: 100%;
+  background: var(--stable-teal);
+  color: var(--stable-dark);
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.85rem 1rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+.connect-btn:hover,
+.stake-btn:hover {
+  background: var(--stable-mint);
+  transform: scale(1.015);
+  box-shadow: 0 0 20px var(--stable-mint);
+}
+
+/* Conversion Rate Text */
+.conversion-rate {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--stable-mint);
+  font-weight: 500;
+}
+
+/* Responsive tweaks */
+@media(max-width: 480px){
+  .staking-card { padding: 1.5rem; margin: 1rem; }
+  .staking-intro h2 { font-size: 1.5rem; }
+  .staking-intro p { font-size: 0.85rem; }
+  .tab { padding: 0.75rem 1rem; font-size: 0.9rem; }
+}
+
+.account-btn {
+  background: transparent;
+  border: none;
+  color: rgba(169, 251, 215, 0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 0;
+  transition: opacity 0.15s ease;
+}
+
+.account-btn:hover {
+  opacity: 0.6;
+}
+
+/* AUTH OVERLAY */
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 27, 23, 0.65);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+padding-bottom: env(safe-area-inset-bottom);
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* MODAL */
+.auth-modal {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  color: #021B17;
+  animation: slideUp 0.25s ease;
+  border-radius: 28px 28px 0 0;
+  padding: 28px 22px 32px;
+}
+
+/* CLOSE */
+.auth-close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #6b7c78;
+}
+
+/* TEXT */
+.auth-modal h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* BUTTONS */
+.auth-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-google {
+  background: #0E3C35;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 13px;
+  font-weight: 500;
+  box-shadow: 0 6px 18px rgba(2, 27, 23, 0.25);
+}
+
+.auth-email {
+  background: var(--stable-teal);
+  color: #00261f;
+}
+
+/* INPUT */
+.auth-input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  background: #ffffff;
+  border: 1px solid #d6e1dd;
+  font-size: 1rem;
+}
+
+.auth-input::placeholder {
+  color: #9fb1ac;
+}
+
+/* DIVIDER */
+.auth-divider {
+  margin: 18px 0;
+  font-size: 0.8rem;
+  color: #9fb7af;
+}
+
+/* FOOTER */
+.auth-footer {
+  font-size: 0.75rem;
+  text-align: center;
+  color: #8a9794;
+  margin-top: 16px;
+}
+
+/* ANIMATION */
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.auth-logo {
+  width: 44px;
+  margin: 0 auto 12px;
+  display: block;
+}
+
+.auth-title {
+  text-align: center;
+  margin-bottom: 6px;
+  color: white;
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.auth-subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--auth-muted);
+  margin-bottom: 22px;
+}
+
+.auth-modal {
+  background: linear-gradient(
+    180deg,
+    #021B17 0%,
+    white 100%
+  );
+}
+.auth-google {
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(169, 251, 215, 0.95),
+    rgba(0, 200, 150, 0.95)
+  );
+  color: #021B17;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 200, 150, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.auth-google:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(0, 200, 150, 0.35);
+  background: #A9FBD7;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 200, 150, 0.35);
+  background: #ffffff;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #00C896;
+  box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.15);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.auth-modal {
+  animation: slideUp 0.35s ease-out;
+  width: 100dvw;
+  max-width: 100dvw;
+  border-radius: 0;
+  padding-top: 64px;
+}
+
+.auth-email-wrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.auth-email-wrap input {
+  width: 100%;
+  padding: 14px 44px 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #dbe4e1;
+  font-size: 0.95rem;
+}
+
+/* Base account button */
+.account-btn {
+  background: transparent;
+  border: none;
+  color: rgba(169, 251, 215, 0.85);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: opacity 0.15s ease;
+}
+
+.account-btn:hover {
+  opacity: 0.65;
+}
+
+/* Authenticated state → avatar */
+.account-btn.authed {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(169, 251, 215, 0.35);
+  background: rgba(169, 251, 215, 0.12);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Avatar initial */
+.avatar-initial {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #0bd9a6, #067a60);
+  color: #021b17;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 14px rgba(0, 200, 150, 0.35);
+}
+
+.account-menu {
+  position: absolute;
+  top: 56px;
+  right: 20px;
+  background: #0b1f1a;
+  border: 1px solid rgba(169,251,215,0.25);
+  border-radius: 12px;
+  padding: 8px;
+  display: none;
+  z-index: 1500;
+}
+
+.account-menu button {
+  background: none;
+  border: none;
+  color: var(--stable-mint);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 6px 10px;
+  text-align: left;
+  width: 100%;
+}
+
+.account-menu button:hover {
+  opacity: 0.7;
+}
+
+.profile-panel {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 280px;
+  background: #0b1f1a;
+  border: 1px solid rgba(169,251,215,0.25);
+  border-radius: 16px;
+  padding: 16px;
+  display: none;
+  z-index: 3000;
+}
+
+.profile-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.profile-email {
+  font-size: 0.85rem;
+  color: var(--staking-text);
+}
+
+.profile-network {
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.profile-section {
+  margin-bottom: 14px;
+}
+
+.profile-section .label {
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.address-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.address-row button {
+  background: none;
+  border: none;
+  color: var(--stable-mint);
+  cursor: pointer;
+}
+
+.balance {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.profile-logout {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--stable-mint);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding-top: 8px;
+}
+
+.avatar-initial img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(180deg,#0bd9a6,#067a60);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #021b17;
+  font-weight: 600;
+}
+
+.profile-panel {
+  display: none;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.staking-section {
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+@media (hover: hover) {
+  .staking-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 200, 150, 0.35);
+  }
+}
+
+.page-shell {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 38px;   /* controls space ABOVE hero */
+  padding-bottom: 24px;
+  gap: 80px;           /* controls space BETWEEN hero &
+}
+
+/* =========================================
+   GLOBAL MOBILE INTERACTION FIX
+========================================= */
+
+/* Remove ugly tap highlight everywhere */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove focus / active outlines globally */
+*:focus,
+*:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Buttons & clickable elements */
+button,
+[role="button"],
+a,
+input,
+select,
+textarea {
+  outline: none;
+  -webkit-appearance: none;
+}
+
+/* Prevent Chrome's gray flash on tap */
+button:active,
+a:active {
+  background-image: none;
+}
+
+.card:active {
+  background: rgba(110, 231, 183, 0.08);
+}
+
+button:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+/* Disable text selection & tap highlight globally */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+/* Re-enable text selection ONLY where needed */
+input,
+textarea {
+  user-select: text;
+}
+
+button,
+.stake-tab,
+.unstake-tab,
+.copy-btn,
+.deposit-btn {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="stablex.png" type="image/png" sizes="16x16" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="luminth.css" />
+
+  <title>A smarter way to grow your stable assets.</title>
+
+  <style>
+    .loading-spinner {
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #00ff90;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Wrong network banner */
+    #networkBanner {
+      display: none;
+      background: #ff4444;
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+    }
+    #networkBanner button {
+      margin-left: 12px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.5);
+      color: #fff;
+      border-radius: 6px;
+      padding: 2px 10px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    body.has-banner { padding-top: 44px; }
+  </style>
+</head>
+
+<body>
+
+<!-- WRONG NETWORK BANNER -->
+<div id="networkBanner">
+  ⚠️ Please switch to Somnia Testnet (Chain ID 50312)
+  <button id="switchNetworkBtn" type="button">Switch Network</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark">
+  <a class="navbar-brand d-flex align-items-center" href="/">
+    <img src="luminth2.png" style="width:40px" alt="Luminth Logo" />
+  </a>
+  <button id="accountBtn" class="account-btn" type="button">
+    <div id="accountAvatar">Connect</div>
+  </button>
+</nav>
+
+<!-- ACCOUNT MENU -->
+<div id="accountMenu" class="account-menu">
+  <button id="openProfile" type="button">Profile</button>
+  <button id="openWithdraw" type="button">Withdraw</button>
+  <button id="disconnectBtn" type="button">Disconnect</button>
+</div>
+
+<!-- PROFILE PANEL -->
+<div id="profilePanel" class="profile-panel">
+  <div class="profile-header">
+    <div class="profile-avatar" id="profileAvatar">L</div>
+    <div class="profile-meta">
+      <div class="profile-email" id="profileEmail">—</div>
+      <div class="profile-network">Somnia Testnet</div>
+    </div>
+  </div>
+  <div class="profile-section">
+    <span class="label">Wallet address</span>
+    <div class="address-row">
+      <span id="walletAddress">—</span>
+      <button id="copyAddress" type="button">Copy</button>
+    </div>
+  </div>
+  <div class="profile-section">
+    <span class="label">USDT0 balance</span>
+    <div class="balance" id="profileBalance">0.00</div>
+  </div>
+  <button id="profileDisconnect" class="profile-logout" type="button">Disconnect</button>
+</div>
+
+<!-- WITHDRAW MODAL -->
+<div id="withdrawOverlay" class="auth-overlay">
+  <div class="auth-modal">
+    <button class="auth-close" id="closeWithdraw">&times;</button>
+    <h2 class="auth-title">Withdraw USDT0</h2>
+    <p class="auth-subtitle">Send USDT0 to any address</p>
+    <div class="auth-email-wrap">
+      <input id="withdrawTo" type="text" placeholder="Recipient address" />
+    </div>
+    <div class="auth-email-wrap" style="position:relative">
+      <input id="withdrawAmount" type="number" placeholder="Amount (USDT0)" />
+      <button id="withdrawMax" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#00C896;font-weight:600;cursor:pointer;">Max</button>
+    </div>
+    <button class="auth-btn auth-email" id="confirmWithdraw">Send USDT0</button>
+    <p id="withdrawStatus" style="margin-top:12px;font-size:0.8rem;text-align:center;opacity:0.7;"></p>
+  </div>
+</div>
+
+<!-- INTRO + STAKING CARD -->
+<div class="page-shell">
+  <section class="hero-wrap">
+    <div class="staking-intro">
+      <h2>A smarter way to grow your Stable assets.</h2>
+      <p>Now you can earn automatically on Stable assets with full access at all times. No lockups. Just steady growth.</p>
+    </div>
+  </section>
+
+  <section class="staking-section">
+    <section class="staking-card">
+      <div class="staking-toggle">
+        <button id="stakeTab" class="tab active" type="button">Stake</button>
+        <button id="unstakeTab" class="tab" type="button">Unstake</button>
+      </div>
+
+      <h2 class="staking-heading">Get sUSDT and Earn</h2>
+
+      <div class="staking-form">
+        <div class="form-group">
+          <label>You're Staking</label>
+          <div class="input-token">
+            <img src="stablex.png" class="token-icon" alt="USDT0" />
+            <input type="number" id="stakeInput" placeholder="0.0 USDT0" />
+            <span class="max-btn" id="maxBtn">Max</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>To Receive <span class="slippage">0% Slippage</span></label>
+          <div class="input-token">
+            <img src="stablex.png" class="token-icon" alt="sUSDT" />
+            <input type="text" value="sUSDT" readonly />
+          </div>
+        </div>
+
+        <!-- Shown when wallet NOT connected -->
+        <button class="connect-btn" id="connectWalletBtn" type="button">Connect Wallet</button>
+
+        <!-- Shown when connected + no USDT0 balance -->
+        <button class="connect-btn" id="noFundsBtn" type="button" style="display:none">No USDT0 balance</button>
+
+        <!-- Shown when connected + has USDT0 balance -->
+        <button class="stake-btn" id="stakeButton" type="button" style="display:none">
+          <span id="stakeActionText">Stake</span>
+        </button>
+
+        <p class="conversion-rate">1 USDT0 ~ 1 sUSDT</p>
+        <p id="status" style="text-align:center;margin-top:.75rem;font-size:0.82rem;opacity:0.75;"></p>
+      </div>
+
+      <p class="conversion-rate">
+        Your sUSDT balance: <span id="sUSDTBalance">0.00</span>
+      </p>
+    </section>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<script src="luminth.js"></script>
+
+</body>
+</html>
