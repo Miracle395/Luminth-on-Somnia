@@ -48,38 +48,41 @@ Luminth introduces:
 
 ---
 
-## 🌐 Deployment
+## Deployment.
 
 - **Network:** Somnia Testnet (Shannon)
 - **Vault Contract:** `0x83c1006a1D4D68727a6eBD358Fbfb7a38234066C`
 
 ---
 
-## 🚀 Key Features
+## Key Features.
 
-- Stake / Unstake $PONG
-- Receive liquid staking token (sPONG)
-- Real-time balance updates via on-chain events
-- Animated UI feedback for yield
-- No backend or polling required
+- Stake / Unstake $PONG.
+- Receive liquid staking token. (sPONG)
+- Real-time balance updates via onchain events.
+- Animated UI feedback for yield.
+- No backend or polling required.
 
 ---
 
-## 🎯 Use Case
+## Luminth has git use cases. 
 
-Luminth demonstrates how **reactivity can transform DeFi UX** from static dashboards into live, event-driven financial interfaces.
+Luminth demonstrates how **reactivity can transform DeFi UX** from static dashboards into live, event driven financial interfaces.
 
 This pattern can extend to:
-- lending protocols
-- liquidation monitoring
-- trading dashboards
-- on-chain analytics
+- lending protocols.
+- liquidation monitoring.
+- trading dashboards.
+- on-mchain analytics.
 
 ---
 
-## 🧪 How to Run Locally
+##  How to Run Locally
 
 ```bash
 git clone <your-repo>
 cd luminth
 open index.html
+
+# Website?
+https://luminthonsomnia.vercel.app/
