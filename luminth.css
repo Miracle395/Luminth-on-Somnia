@@ -889,3 +889,26 @@ button,
   width: 100%;
   height: 140px;   /* CRITICAL */
 }
+
+
+.account-btn.authed {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(169, 251, 215, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-initial {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(180deg,#00C896,#067a60);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #021B17;
+  font-weight: 600;
+}
