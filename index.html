@@ -142,22 +142,27 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-
 <script src="luminth.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>
-  eruda.init();
-</script>
+<!-- Debug -->
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
 
-<script src="https://refyn-indol.vercel.app/widget.js"></script>
+<!-- REFYN -->
 <script>
-  window.addEventListener("load", function () {
+  function initRefyn() {
+    if (!window.REFYN) {
+      console.error("REFYN not loaded");
+      return;
+    }
+
     REFYN.init({
       clientId: "luminth"
     });
-  });
+  }
 </script>
+
+<script src="https://refyn-indol.vercel.app/widget.js" onload="initRefyn()"></script>
   
 </body>
 </html>
